@@ -1,12 +1,12 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "GoInstant Authentication for Your Perl Application",
    "author" : [
-      "Jeremy Stashewsky <jeremy@goinstant.com>"
+      "GoInstant Inc., a salesforce.com company."
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.133380",
    "license" : [
-      "perl_5"
+      "unknown"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -43,6 +43,8 @@
       },
       "runtime" : {
          "requires" : {
+            "JSON::WebToken" : "0.07",
+            "MIME::Base64" : "0",
             "perl" : "5.008005"
          }
       },
@@ -53,5 +55,8 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01"
+   "version" : "0.01",
+   "x_contributors" : [
+      "Jeremy Stashewsky <jeremy@goinstant.com>"
+   ]
 }
