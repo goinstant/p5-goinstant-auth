@@ -7,10 +7,9 @@ our $VERSION = "0.01";
 
 use GoInstant::Auth::Signer;
 
-sub Signer($) {
-    return GoInstant::Auth::Signer->new({
-        key => $_[0]
-    });
+sub Signer {
+    my (undef,$key) = @_;
+    return GoInstant::Auth::Signer->new({ key => $key });
 }
 
 1;

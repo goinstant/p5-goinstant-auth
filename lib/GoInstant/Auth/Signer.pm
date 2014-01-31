@@ -13,16 +13,24 @@ sub _decode_key {
 }
 
 sub new {
-    my $clazz = shift;
+    my ($clazz, $args) = @_;
     my $self = bless {}, $clazz;
-    my %args = @_;
 
-    $self->{key} = _decode_key($args{key});
-    $self->{alg} = $args{alg} || 'HS256';
+    die "A Base64 key is required"
+        unless defined $args->{key} and $args->{key};
 
-    if ($self->{alg} != 'HS256' &&
-        $self->{alg} != 'HS384' &&
-        $self->{alg} != 'HS512'
+    $self->{key} = _decode_key($args->{key});
+
+    die "Could not parse Base64 key"
+        unless $self->{key};
+    die "Key appears to be too short"
+        if length($self->{key}) < 64;
+
+    $self->{alg} = $args->{alg} || 'HS256';
+
+    if ($self->{alg} ne 'HS256' &&
+        $self->{alg} ne 'HS384' &&
+        $self->{alg} ne 'HS512'
     ) {
         die 'Invalid signature algorithm; '.
             'GoInstant supports HS256/HS384/HS512';
@@ -47,10 +55,8 @@ my %GROUP_REQUIRED = (
     display_name => 'dn',
 );
 
-sub sign {
-    my $self = shift;
-    my $args = shift;
-
+sub _info_to_claims {
+    my ($self, $args) = @_;
     my $k;
     my %claims = ();
 
@@ -76,7 +82,22 @@ sub sign {
         }
     }
 
-    return JSON::WebToken->encode(\%claims, $self->{key}, $self->{alg});
+    $claims{aud} = ['goinstant.net'];
+    $claims{iat} = time;
+
+    return \%claims;
+}
+
+sub sign {
+    my ($self, $args) = @_;
+
+    my $claims = $self->_info_to_claims($args);
+    return JSON::WebToken->encode($claims, $self->{key}, $self->{alg});
+}
+
+sub _decode {
+    my ($self, $jwt) = @_;
+    return JSON::WebToken->decode($jwt, $self->{key}, $self->{alg});
 }
 
 1;
