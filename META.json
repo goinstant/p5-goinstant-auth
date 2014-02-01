@@ -55,6 +55,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/goinstant/p5-goinstant-auth/issues"
+      },
+      "homepage" : "https://github.com/goinstant/p5-goinstant-auth",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/goinstant/p5-goinstant-auth.git",
+         "web" : "https://github.com/goinstant/p5-goinstant-auth"
+      }
+   },
    "version" : "0.01",
    "x_contributors" : [
       "Jeremy Stashewsky <jeremy@goinstant.com>"

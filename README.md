@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/goinstant/p5-goinstant-auth.png?branch=master)](https://travis-ci.org/goinstant/p5-goinstant-auth)
 # NAME
 
 GoInstant::Auth - GoInstant Authentication for Your Perl Application
