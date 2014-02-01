@@ -9,7 +9,7 @@ GoInstant::Auth - GoInstant Authentication for Your Perl Application
 
     my $signer = GoInstant::Auth->Signer($key);
 
-    var $jwt = $signer->sign({
+    my $jwt = $signer->sign({
         user_id => 'permanentid',
         display_name => 'Bob Smith',
         groups => [
